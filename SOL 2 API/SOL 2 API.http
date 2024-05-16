@@ -1,0 +1,6 @@
+@SOL_2_API_HostAddress = http://localhost:5189
+
+GET {{SOL_2_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
