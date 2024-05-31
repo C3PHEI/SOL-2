@@ -5,8 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SOL_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Kalku" Height="650" Width="900">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <!-- Preis zu bezahlen Section -->
+        <GroupBox Header="Preis zu bezahlen" Margin="10" Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Width="100" Margin="5"/>
+                <Label Content="CHF" VerticalAlignment="Center" Margin="5"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Konto Informationen Section -->
+        <GroupBox Header="Konto Informationen" Margin="10" Grid.Row="0" HorizontalAlignment="Right">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Angemeldetes Konto:" VerticalAlignment="Center" Margin="5"/>
+                    <TextBox Width="100" Margin="5"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Verbleibendes Bargeld" Margin="5"/>
+                    <Button Content="Maximilian" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Erhaltene Scheine Section -->
+        <GroupBox Header="Erhaltene Scheine" Margin="10" Grid.Row="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5" Height="60">
+                    <Label Content="Aktuelle Summe:" VerticalAlignment="Center"/>
+                    <Label Content="200 CHF" VerticalAlignment="Center" Margin="5"/>
+                </StackPanel>
+                <GroupBox Header="Scheine hinzufügen" Margin="5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <!-- Scheine mit Bildern und Spinnern -->
+                            <StackPanel Margin="5">
+                                <Image Source="Images/10er.png" Width="80" Height="150"/>
+                                <ComboBox Width="80"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Image Source="images/20er.png" Width="80" Height="150"/>
+                                <ComboBox Width="80"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Image Source="images/50er.png" Width="80" Height="150"/>
+                                <ComboBox Width="80"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Image Source="images/100er.png" Width="80" Height="150"/>
+                                <ComboBox Width="80"/>
+                            </StackPanel>
+                            <StackPanel Margin="5">
+                                <Image Source="images/200er.png" Width="80" Height="150"/>
+                                <ComboBox Width="80"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button Content="Zurücksetzen" Margin="5"/>
+                            <Button Content="Einfügen" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Ausrechnen Button -->
+        <Button Content="Ausrechnen" Background="Green" Foreground="White" FontSize="16" Margin="10" Grid.Row="2" Height="50"/>
     </Grid>
 </Window>
+
+
