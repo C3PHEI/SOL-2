@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SOL_2"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Kalku" Height="650" Width="900">
+        Title="Kalku" Height="660" Width="570">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,70 +15,76 @@
         </Grid.RowDefinitions>
 
         <!-- Preis zu bezahlen Section -->
-        <GroupBox Header="Preis zu bezahlen" Margin="10" Grid.Row="0">
+        <GroupBox Header="Preis zu bezahlen" Margin="10" Grid.Row="0" BorderThickness="1">
             <StackPanel Orientation="Horizontal">
-                <TextBox Width="100" Margin="5"/>
-                <Label Content="CHF" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Width="160" Margin="5" FontSize="47" />
+                <Label Content="CHF" VerticalAlignment="Center" Margin="5" FontSize="25" FontWeight="Bold"/>
             </StackPanel>
         </GroupBox>
 
         <!-- Konto Informationen Section -->
-        <GroupBox Header="Konto Informationen" Margin="10" Grid.Row="0" HorizontalAlignment="Right">
+        <GroupBox Header="Konto Informationen" Margin="10" Grid.Row="0" HorizontalAlignment="Right" BorderThickness="1">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Angemeldetes Konto:" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox Width="100" Margin="5"/>
+                    <Label Content="Konto:" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold"/>
+                    <TextBox Width="100" Margin="0,5,0,5" FontSize="25"/>
+                    <Button Content="X" Margin="0,5,5,5" Width="38" Background="Red" FontSize="20" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Verbleibendes Bargeld" Margin="5"/>
-                    <Button Content="Maximilian" Margin="5"/>
+                    <Button Content="Verbleibendes Bargeld" Margin="5" Width="138" FontWeight="DemiBold" FontSize="13"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
 
         <!-- Erhaltene Scheine Section -->
-        <GroupBox Header="Erhaltene Scheine" Margin="10" Grid.Row="1">
+        <GroupBox Header="Erhaltene Scheine" Margin="10" Grid.Row="1" BorderThickness="2" BorderBrush="Black">
             <StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="5" Height="60">
-                    <Label Content="Aktuelle Summe:" VerticalAlignment="Center"/>
-                    <Label Content="200 CHF" VerticalAlignment="Center" Margin="5"/>
+                <StackPanel Orientation="Horizontal" Margin="5" Height="70">
+                    <StackPanel Orientation="Horizontal" Margin="5" Height="60">
+                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5">
+                            <Label Content="Aktuelle Summe:" VerticalAlignment="Center" FontSize="25"/>
+                        </Border>
+                        <Border BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5">
+                            <Label Content="200 CHF" FontSize="25" FontWeight="Bold"/>
+                        </Border>
+                    </StackPanel>
+
                 </StackPanel>
-                <GroupBox Header="Scheine hinzufügen" Margin="5">
+                <GroupBox Header="Scheine hinzufügen" Margin="5" BorderBrush="Black">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <!-- Scheine mit Bildern und Spinnern -->
                             <StackPanel Margin="5">
-                                <Image Source="Images/10er.png" Width="80" Height="150"/>
-                                <ComboBox Width="80"/>
+                                <Image Source="Images/10er.png" Width="90" Height="200"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
                             </StackPanel>
                             <StackPanel Margin="5">
-                                <Image Source="images/20er.png" Width="80" Height="150"/>
-                                <ComboBox Width="80"/>
+                                <Image Source="images/20er.png" Width="90" Height="200"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
                             </StackPanel>
                             <StackPanel Margin="5">
-                                <Image Source="images/50er.png" Width="80" Height="150"/>
-                                <ComboBox Width="80"/>
+                                <Image Source="images/50er.png" Width="90" Height="200"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
                             </StackPanel>
                             <StackPanel Margin="5">
-                                <Image Source="images/100er.png" Width="80" Height="150"/>
-                                <ComboBox Width="80"/>
+                                <Image Source="images/100er.png" Width="90" Height="200"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
                             </StackPanel>
                             <StackPanel Margin="5">
-                                <Image Source="images/200er.png" Width="80" Height="150"/>
-                                <ComboBox Width="80"/>
+                                <Image Source="images/200er.png" Width="90" Height="200"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
                             </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                            <Button Content="Zurücksetzen" Margin="5"/>
-                            <Button Content="Einfügen" Margin="5"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                    <Button Content="Zurücksetzen" Margin="5" Width="110" Height="27" FontSize="15"/>
+                    <Button Content="Einfügen" Width="100" Height="27" FontSize="15" Background="LightGreen" FontWeight="DemiBold"/>
+                </StackPanel>
             </StackPanel>
         </GroupBox>
-
         <!-- Ausrechnen Button -->
-        <Button Content="Ausrechnen" Background="Green" Foreground="White" FontSize="16" Margin="10" Grid.Row="2" Height="50"/>
+        <Button Content="Ausrechnen" Background="Green" Foreground="White" FontSize="25" Margin="10" Grid.Row="2" Height="50" FontWeight="Bold" />
     </Grid>
 </Window>
 

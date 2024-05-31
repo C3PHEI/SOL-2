@@ -9,4 +9,24 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\100er.PNG" />
+    <None Remove="Images\10er.PNG" />
+    <None Remove="Images\200er.PNG" />
+    <None Remove="Images\20er.PNG" />
+    <None Remove="Images\50er.PNG" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\100er.PNG" />
+    <Resource Include="Images\10er.PNG" />
+    <Resource Include="Images\200er.PNG" />
+    <Resource Include="Images\20er.PNG" />
+    <Resource Include="Images\50er.PNG" />
+  </ItemGroup>
+
 </Project>
