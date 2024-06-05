@@ -22,12 +22,10 @@ namespace SOL_2_API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetCashRegister()
+        public async Task<IActionResult> GetAllCashRegisters()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var cashRegister = await _dbService.CashRegisters.Find(c => c.UserId == ObjectId.Parse(userId)).FirstOrDefaultAsync();
-            return Ok(cashRegister);
+            var cashRegisters = await _dbService.CashRegisters.Find(_ => true).ToListAsync();
+            return Ok(cashRegisters);
         }
 
         [HttpPut("update")]

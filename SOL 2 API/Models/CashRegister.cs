@@ -1,26 +1,23 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
 
 namespace SOL_2_API.Models
 {
     public class CashRegister
     {
         [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
 
         [BsonElement("userId")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId UserId { get; set; }
 
         [BsonElement("bills")]
-        public Dictionary<string, int> Bills { get; set; } = new Dictionary<string, int>
-        {
-            { "200", 0 }, { "100", 0 }, { "50", 0 }, { "20", 0 }, { "10", 0 }
-        };
+        public Dictionary<string, int> Bills { get; set; }
 
         [BsonElement("coins")]
-        public Dictionary<string, int> Coins { get; set; } = new Dictionary<string, int>
-        {
-            { "5", 0 }, { "2", 0 }, { "1", 0 }, { "0.5", 0 }, { "0.2", 0 }, { "0.1", 0 }, { "0.05", 0 }, { "0.01", 0 }
-        };
+        public Dictionary<string, int> Coins { get; set; }
     }
 }

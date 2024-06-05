@@ -20,8 +20,11 @@ builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 
 // Add Database Service
-builder.Services.AddSingleton(sp =>
-    new DatabaseService(configuration.GetConnectionString("MongoDB"), "CashbackCalculator"));
+builder.Services.AddSingleton<DatabaseService>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    return new DatabaseService(config);
+});
 
 // Add Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
