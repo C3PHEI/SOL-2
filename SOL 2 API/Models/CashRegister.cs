@@ -14,13 +14,13 @@ namespace SOL_2_API.Models
         [BsonElement("bills")]
         public Dictionary<string, int> Bills { get; set; } = new Dictionary<string, int>
         {
-            { "50", 0 }, { "20", 0 }, { "10", 0 }, { "5", 0 }
+            { "200", 0 }, { "100", 0 }, { "50", 0 }, { "20", 0 }, { "10", 0 }
         };
 
         [BsonElement("coins")]
         public Dictionary<string, int> Coins { get; set; } = new Dictionary<string, int>
         {
-            { "2", 0 }, { "1", 0 }, { "0.5", 0 }, { "0.2", 0 }, { "0.1", 0 }
+            { "5", 0 }, { "2", 0 }, { "1", 0 }, { "0.5", 0 }, { "0.2", 0 }, { "0.1", 0 }, { "0.05", 0 }, { "0.01", 0 }
         };
     }
 }
