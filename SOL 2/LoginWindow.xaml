@@ -14,18 +14,19 @@
         </Grid.ColumnDefinitions>
 
         <!-- User Label and TextBox -->
-        <Label Content="User" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+        <Label Content="User" FontWeight="DemiBold" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
         <TextBox Width="250" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
 
         <!-- Passwort Label and PasswordBox -->
-        <Label Content="Passwort" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
+        <Label Content="Passwort" FontWeight="DemiBold" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
         <PasswordBox Width="250" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center"/>
 
         <!-- Login Button -->
         <Button Content="Login" 
                 Background="Green" 
                 Foreground="White" 
-                FontSize="16" 
+                FontSize="18" 
+                FontWeight="Bold"
                 Grid.Row="2" 
                 Grid.ColumnSpan="2" 
                 Margin="10" 
