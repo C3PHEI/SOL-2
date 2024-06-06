@@ -22,6 +22,7 @@ namespace SOL_2_API.Controllers
         }
 
         [HttpGet]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAllCashRegisters()
         {
             var cashRegisters = await _dbService.CashRegisters.Find(_ => true).ToListAsync();
@@ -35,15 +36,43 @@ namespace SOL_2_API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> UpdateCashRegister(string id, [FromBody] CashRegister updatedCashRegister)
+        [HttpGet("{userId:length(24)}")]
+        //[Authorize(Roles = "admin")]
+        public async Task<IActionResult> GetCashRegisterByUserId(string userId)
         {
-            if (!ObjectId.TryParse(id, out var objectId))
+            if (!ObjectId.TryParse(userId, out var objectId))
             {
-                return BadRequest(new { message = "Ungültiges ID-Format." });
+                return BadRequest(new { message = "Ungültiges UserID-Format." });
             }
 
-            var filter = Builders<CashRegister>.Filter.Eq(cr => cr.Id, objectId);
+            var filter = Builders<CashRegister>.Filter.Eq(cr => cr.UserId, objectId);
+            var cashRegister = await _dbService.CashRegisters.Find(filter)
+                .Project(c => new
+                {
+                    Id = c.Id.ToString(),
+                    UserId = c.UserId.ToString(),
+                    Bills = c.Bills,
+                    Coins = c.Coins
+                })
+                .FirstOrDefaultAsync();
+
+            if (cashRegister == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(cashRegister);
+        }
+
+        [HttpPut("{userId:length(24)}")]
+        public async Task<IActionResult> UpdateCashRegisterByUserId(string userId, [FromBody] CashRegister updatedCashRegister)
+        {
+            if (!ObjectId.TryParse(userId, out var objectId))
+            {
+                return BadRequest(new { message = "Ungültiges UserID-Format." });
+            }
+
+            var filter = Builders<CashRegister>.Filter.Eq(cr => cr.UserId, objectId);
             var cashRegister = await _dbService.CashRegisters.Find(filter).FirstOrDefaultAsync();
 
             if (cashRegister == null)

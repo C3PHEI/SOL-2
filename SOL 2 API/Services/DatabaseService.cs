@@ -16,8 +16,8 @@ namespace SOL_2_API.Services
             _database = client.GetDatabase(databaseName);
         }
 
+        public IMongoCollection<Restock> Messages => _database.GetCollection<Restock>("restock");
         public IMongoCollection<User> Users => _database.GetCollection<User>("users");
         public IMongoCollection<CashRegister> CashRegisters => _database.GetCollection<CashRegister>("cashregisters");
-        public IMongoCollection<Message> Messages => _database.GetCollection<Message>("messages");
     }
 }
