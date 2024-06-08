@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\100er.PNG" />
-    <None Remove="Images\10er.PNG" />
-    <None Remove="Images\200er.PNG" />
-    <None Remove="Images\20er.PNG" />
-    <None Remove="Images\50er.PNG" />
+    <None Remove="Views\Images\100er.PNG" />
+    <None Remove="Views\Images\10er.PNG" />
+    <None Remove="Views\Images\200er.PNG" />
+    <None Remove="Views\Images\20er.PNG" />
+    <None Remove="Views\Images\50er.PNG" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,11 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\100er.PNG" />
-    <Resource Include="Images\10er.PNG" />
-    <Resource Include="Images\200er.PNG" />
-    <Resource Include="Images\20er.PNG" />
-    <Resource Include="Images\50er.PNG" />
+    <Resource Include="Views\Images\100er.PNG" />
+    <Resource Include="Views\Images\10er.PNG" />
+    <Resource Include="Views\Images\200er.PNG" />
+    <Resource Include="Views\Images\20er.PNG" />
+    <Resource Include="Views\Images\50er.PNG" />
   </ItemGroup>
 
 </Project>
