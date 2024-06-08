@@ -15,7 +15,7 @@ namespace SOL_2.Services
             var json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("https://yourapiurl.com/api/login", content);
+            var response = await client.PostAsync("https://localhost:7094/api/Users/login", content);
 
             if (response.IsSuccessStatusCode)
             {

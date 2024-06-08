@@ -1,5 +1,6 @@
 ﻿using SOL_2.Models;
 using SOL_2.Services;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace SOL_2.ViewModels
         private string _username;
         private string _password;
         private string _message;
+
+        public Action CloseAction { get; set; }
 
         public string Username
         {
@@ -54,19 +57,25 @@ namespace SOL_2.ViewModels
 
         private async Task LoginAsync()
         {
-            var user = new User { Username = Username, Password = Password };
-            var tokenResponse = await _apiService.LoginAsync(user);
-
-            if (tokenResponse != null)
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
-                Message = "Login erfolgreich!";
-                // Token received, navigate to main window
+                Message = "Geben Sie etwas ein!";
+                return;
+            }
+
+            var user = new User { Username = Username, Password = Password };
+            var response = await _apiService.LoginAsync(user);
+
+            if (response != null && response.Message == "Login erfolgreich!")
+            {
+                Message = response.Message;
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
+                CloseAction?.Invoke(); // Close the login window
             }
             else
             {
-                Message = "Login fehlgeschlagen.";
+                Message = response?.Message ?? "Login fehlgeschlagen.";
             }
         }
 

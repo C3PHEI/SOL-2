@@ -9,7 +9,9 @@ namespace SOL_2.Views
         public LoginWindow()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            var viewModel = new LoginViewModel();
+            viewModel.CloseAction = new Action(this.Close);
+            DataContext = viewModel;
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)

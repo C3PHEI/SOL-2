@@ -74,7 +74,6 @@ namespace SOL_2_API.Controllers
 
             return Ok(new { message = "Login erfolgreich!" });
         }
-
     }
 }
 
