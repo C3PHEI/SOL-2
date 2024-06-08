@@ -20,11 +20,11 @@
 
         <!-- User Label and TextBox -->
         <Label Content="User" FontWeight="DemiBold" Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-        <TextBox Width="250" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Width="250" Grid.Row="0" Grid.Column="1" Margin="5" VerticalAlignment="Center" FontSize="15" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Passwort Label and PasswordBox -->
         <Label Content="Passwort" FontWeight="DemiBold" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center"/>
-        <PasswordBox Width="250" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center" PasswordChanged="PasswordBox_PasswordChanged"/>
+        <PasswordBox Width="250" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center" FontSize="15" PasswordChanged="PasswordBox_PasswordChanged"/>
 
         <!-- Message TextBlock -->
         <TextBlock Text="{Binding Message}" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" FontSize="25" Foreground="Red" VerticalAlignment="Center"/>
