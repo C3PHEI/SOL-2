@@ -31,7 +31,7 @@ namespace SOL_2.ViewModels
             {
                 if (IsTextAllowed(value))
                 {
-                    _price = value.Replace(',', '.'); // Replace comma with dot
+                    _price = value?.Replace(',', '.') ?? string.Empty; // Replace comma with dot
                     OnPropertyChanged();
                 }
             }
@@ -85,30 +85,13 @@ namespace SOL_2.ViewModels
         {
             if (parameter is TextCompositionEventArgs e)
             {
-                if (!Regex.IsMatch(e.Text, "^[0-9,.]$"))
-                {
-                    e.Handled = true;
-                    return;
-                }
-
                 string currentText = Price ?? string.Empty;
-                if ((e.Text == "." || e.Text == ",") && (currentText.Contains(".") || currentText.Contains(",")))
+                int caretIndex = GetCaretIndex();
+
+                string newText = currentText.Insert(caretIndex, e.Text);
+                if (!IsTextAllowed(newText))
                 {
                     e.Handled = true;
-                    return;
-                }
-
-                currentText = currentText.Insert(GetCaretIndex(), e.Text);
-                currentText = currentText.Replace(',', '.');
-
-                if (currentText.Contains("."))
-                {
-                    var parts = currentText.Split('.');
-                    if (parts.Length > 1 && parts[1].Length > 2)
-                    {
-                        e.Handled = true;
-                        return;
-                    }
                 }
             }
         }
@@ -120,25 +103,18 @@ namespace SOL_2.ViewModels
                 if (e.DataObject.GetDataPresent(typeof(string)))
                 {
                     string text = (string)e.DataObject.GetData(typeof(string));
-                    if (!IsTextAllowed(text))
+                    string currentText = Price ?? string.Empty;
+                    int caretIndex = GetCaretIndex();
+
+                    string newText = currentText.Insert(caretIndex, text);
+                    if (!IsTextAllowed(newText))
                     {
                         e.CancelCommand();
                     }
                     else
                     {
                         text = text.Replace(',', '.');
-                        var currentText = Price ?? string.Empty;
-                        currentText = currentText.Insert(GetCaretIndex(), text);
-                        if (currentText.Contains("."))
-                        {
-                            var parts = currentText.Split('.');
-                            if (parts.Length > 1 && parts[1].Length > 2)
-                            {
-                                e.CancelCommand();
-                                return;
-                            }
-                        }
-                        Price = currentText;
+                        Price = newText;
                     }
                 }
                 else
@@ -173,7 +149,7 @@ namespace SOL_2.ViewModels
 
         private void Validate(object parameter)
         {
-            if (decimal.TryParse(Price.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal priceValue))
+            if (decimal.TryParse(Price?.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal priceValue))
             {
                 if (SumBills < priceValue)
                 {
@@ -218,6 +194,7 @@ namespace SOL_2.ViewModels
             OnPropertyChanged(nameof(Bills));
             OnPropertyChanged(nameof(SumBills));
             OnPropertyChanged(nameof(SumBillsWithCurrency));
+            Price = string.Empty;
         }
     }
 }
