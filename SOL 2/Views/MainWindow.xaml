@@ -54,7 +54,7 @@
                             <Label Content="Aktuelle Summe:" VerticalAlignment="Center" FontSize="25"/>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5">
-                            <Label Content="{Binding SumBills}" FontSize="25" FontWeight="Bold"/>
+                            <Label Content="{Binding SumBillsWithCurrency}" FontSize="25" FontWeight="Bold"/>
                         </Border>
                     </StackPanel>
                 </StackPanel>
@@ -86,8 +86,8 @@
                     </StackPanel>
                 </GroupBox>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                    <Button Content="Zurücksetzen" Margin="5" Width="110" Height="27" FontSize="15"/>
-                    <Button Content="Einfügen" Width="100" Height="27" FontSize="15" Background="LightGreen" FontWeight="DemiBold"/>
+                    <Button Content="Zurücksetzen" Margin="5" Width="110" Height="27" FontSize="15" Command="{Binding ResetCommand}"/>
+                    <Button Content="Einfügen" Width="100" Height="27" FontSize="15" Background="LightGreen" FontWeight="DemiBold" Command="{Binding ValidateCommand}"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
