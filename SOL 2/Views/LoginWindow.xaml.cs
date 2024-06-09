@@ -8,7 +8,6 @@ namespace SOL_2.Views
     {
         public LoginWindow()
         {
-            InitializeComponent();
             var viewModel = new LoginViewModel();
             viewModel.CloseAction = new Action(this.Close);
             DataContext = viewModel;

@@ -1,5 +1,6 @@
-﻿using SOL_2.Models;
-using SOL_2.Services;
+﻿using SOL_2.Services;
+using SOL_2.Views;
+using SOL_2.Models;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -15,6 +16,7 @@ namespace SOL_2.ViewModels
         private string _password;
         private string _message;
 
+        // Neue Property für das Schließen des Fensters
         public Action CloseAction { get; set; }
 
         public string Username
@@ -71,7 +73,7 @@ namespace SOL_2.ViewModels
                 Message = response.Message;
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
-                CloseAction?.Invoke(); // Close the login window
+                CloseAction?.Invoke(); // Fenster schließen
             }
             else
             {
