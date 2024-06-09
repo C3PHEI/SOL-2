@@ -1,6 +1,6 @@
-﻿using SOL_2.Services;
+﻿using SOL_2.Models;
+using SOL_2.Services;
 using SOL_2.Views;
-using SOL_2.Models;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -72,8 +72,10 @@ namespace SOL_2.ViewModels
             {
                 Message = response.Message;
                 var mainWindow = new MainWindow();
+                var mainViewModel = (MainViewModel)mainWindow.DataContext;
+                mainViewModel.SetAccountInfo(Username);
                 mainWindow.Show();
-                CloseAction?.Invoke(); // Fenster schließen
+                CloseAction?.Invoke();
             }
             else
             {

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -10,6 +12,15 @@ namespace SOL_2.ViewModels
     {
         private string _price;
         private string _accountInfo;
+
+        private Dictionary<string, int> _bills = new Dictionary<string, int>
+        {
+            { "10", 0 },
+            { "20", 0 },
+            { "50", 0 },
+            { "100", 0 },
+            { "200", 0 }
+        };
 
         public string Price
         {
@@ -34,6 +45,19 @@ namespace SOL_2.ViewModels
             }
         }
 
+        public Dictionary<string, int> Bills
+        {
+            get => _bills;
+            set
+            {
+                _bills = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(SumBills));
+            }
+        }
+
+        public int SumBills => _bills.Sum(b => int.Parse(b.Key) * b.Value);
+
         public ICommand PriceTextInputCommand { get; }
         public ICommand PricePasteCommand { get; }
 
@@ -41,6 +65,11 @@ namespace SOL_2.ViewModels
         {
             PriceTextInputCommand = new RelayCommand(OnPreviewTextInput);
             PricePasteCommand = new RelayCommand(OnPaste);
+        }
+
+        public void SetAccountInfo(string accountInfo)
+        {
+            AccountInfo = accountInfo;
         }
 
         private void OnPreviewTextInput(object parameter)
@@ -89,6 +118,16 @@ namespace SOL_2.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void UpdateBill(string denomination, int value)
+        {
+            if (_bills.ContainsKey(denomination))
+            {
+                _bills[denomination] = value;
+                OnPropertyChanged(nameof(Bills));
+                OnPropertyChanged(nameof(SumBills));
+            }
         }
     }
 }

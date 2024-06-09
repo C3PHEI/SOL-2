@@ -33,7 +33,10 @@
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Konto:" VerticalAlignment="Center" Margin="5" FontSize="15" FontWeight="Bold"/>
-                    <TextBox Width="100" Margin="0,5,0,5" FontSize="25" Text="{Binding AccountInfo, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="0,5,0,5">
+                        <TextBlock Width="100" FontSize="25" Text="{Binding AccountInfo, UpdateSourceTrigger=PropertyChanged}"
+                                   TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <Button Content="X" Margin="0,5,5,5" Width="38" Background="Red" FontSize="20" FontWeight="Bold"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -51,10 +54,9 @@
                             <Label Content="Aktuelle Summe:" VerticalAlignment="Center" FontSize="25"/>
                         </Border>
                         <Border BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5">
-                            <Label Content="200 CHF" FontSize="25" FontWeight="Bold"/>
+                            <Label Content="{Binding SumBills}" FontSize="25" FontWeight="Bold"/>
                         </Border>
                     </StackPanel>
-
                 </StackPanel>
                 <GroupBox Header="Scheine hinzufügen" Margin="5" BorderBrush="Black">
                     <StackPanel>
@@ -62,23 +64,23 @@
                             <!-- Scheine mit Bildern und Spinnern -->
                             <StackPanel Margin="5">
                                 <Image Source="Images/10er.png" Width="90" Height="200"/>
-                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="{Binding Bills[10], UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="10" ValueChanged="OnBillValueChanged"/>
                             </StackPanel>
                             <StackPanel Margin="5">
                                 <Image Source="images/20er.png" Width="90" Height="200"/>
-                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="{Binding Bills[20], UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="20" ValueChanged="OnBillValueChanged"/>
                             </StackPanel>
                             <StackPanel Margin="5">
                                 <Image Source="images/50er.png" Width="90" Height="200"/>
-                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="{Binding Bills[50], UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="50" ValueChanged="OnBillValueChanged"/>
                             </StackPanel>
                             <StackPanel Margin="5">
                                 <Image Source="images/100er.png" Width="90" Height="200"/>
-                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="{Binding Bills[100], UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="100" ValueChanged="OnBillValueChanged"/>
                             </StackPanel>
                             <StackPanel Margin="5">
                                 <Image Source="images/200er.png" Width="90" Height="200"/>
-                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="0"/>
+                                <xctk:IntegerUpDown Width="80" Minimum="0" Maximum="100" Value="{Binding Bills[200], UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Tag="200" ValueChanged="OnBillValueChanged"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
