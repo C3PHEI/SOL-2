@@ -14,6 +14,7 @@ namespace SOL_2.ViewModels
     {
         private string _price;
         private string _accountInfo;
+        private string _message;
 
         private Dictionary<string, int> _bills = new Dictionary<string, int>
         {
@@ -24,6 +25,8 @@ namespace SOL_2.ViewModels
             { "200", 0 }
         };
 
+        private Dictionary<string, int> _change = new Dictionary<string, int>();
+
         public string Price
         {
             get => _price;
@@ -33,6 +36,7 @@ namespace SOL_2.ViewModels
                 {
                     _price = value?.Replace(',', '.') ?? string.Empty; // Replace comma with dot
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(CanCalculate));
                 }
             }
         }
@@ -47,6 +51,16 @@ namespace SOL_2.ViewModels
             }
         }
 
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged();
+            }
+        }
+
         public Dictionary<string, int> Bills
         {
             get => _bills;
@@ -56,6 +70,17 @@ namespace SOL_2.ViewModels
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(SumBills));
                 OnPropertyChanged(nameof(SumBillsWithCurrency));
+                OnPropertyChanged(nameof(CanCalculate));
+            }
+        }
+
+        public Dictionary<string, int> Change
+        {
+            get => _change;
+            set
+            {
+                _change = value;
+                OnPropertyChanged();
             }
         }
 
@@ -63,10 +88,13 @@ namespace SOL_2.ViewModels
 
         public string SumBillsWithCurrency => $"{SumBills} CHF";
 
+        public bool CanCalculate => decimal.TryParse(Price, NumberStyles.Any, CultureInfo.InvariantCulture, out var priceValue) && SumBills >= priceValue;
+
         public ICommand PriceTextInputCommand { get; }
         public ICommand PricePasteCommand { get; }
         public ICommand ValidateCommand { get; }
         public ICommand ResetCommand { get; }
+        public ICommand CalculateCommand { get; }
 
         public MainViewModel()
         {
@@ -74,6 +102,7 @@ namespace SOL_2.ViewModels
             PricePasteCommand = new RelayCommand(OnPaste);
             ValidateCommand = new RelayCommand(Validate);
             ResetCommand = new RelayCommand(Reset);
+            CalculateCommand = new RelayCommand(Calculate, param => CanCalculate);
         }
 
         public void SetAccountInfo(string accountInfo)
@@ -144,6 +173,7 @@ namespace SOL_2.ViewModels
                 OnPropertyChanged(nameof(Bills));
                 OnPropertyChanged(nameof(SumBills));
                 OnPropertyChanged(nameof(SumBillsWithCurrency));
+                OnPropertyChanged(nameof(CanCalculate));
             }
         }
 
@@ -195,6 +225,64 @@ namespace SOL_2.ViewModels
             OnPropertyChanged(nameof(SumBills));
             OnPropertyChanged(nameof(SumBillsWithCurrency));
             Price = string.Empty;
+        }
+
+        private void Calculate(object parameter)
+        {
+            if (CanCalculate)
+            {
+                // Berechnung des Rückgelds
+                CalculateChange();
+
+                // Öffnen des MoneyBack-Fensters
+                var moneyBackWindow = new Views.MoneyBack();
+                moneyBackWindow.DataContext = this; // Setze das DataContext des MoneyBack-Fensters
+                moneyBackWindow.Show();
+            }
+        }
+
+        private void CalculateChange()
+        {
+            if (decimal.TryParse(Price?.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal priceValue))
+            {
+                decimal changeAmount = SumBills - priceValue;
+                Change = CalculateBillsAndCoins(changeAmount);
+            }
+        }
+
+        private Dictionary<string, int> CalculateBillsAndCoins(decimal amount)
+        {
+            var result = new Dictionary<string, int>
+            {
+                { "200", 0 },
+                { "100", 0 },
+                { "50", 0 },
+                { "20", 0 },
+                { "10", 0 },
+                { "5", 0 },
+                { "2", 0 },
+                { "1", 0 },
+                { "0.5", 0 },
+                { "0.2", 0 },
+                { "0.1", 0 },
+                { "0.05", 0 },
+                { "0.01", 0 }
+            };
+
+            var denominations = new List<decimal> { 200m, 100m, 50m, 20m, 10m, 5m, 2m, 1m, 0.5m, 0.2m, 0.1m, 0.05m, 0.01m };
+
+            foreach (var denom in denominations)
+            {
+                var key = denom.ToString(CultureInfo.InvariantCulture); // Ensure consistent key format
+
+                while (amount >= denom)
+                {
+                    result[key]++;
+                    amount -= denom;
+                }
+            }
+
+            return result;
         }
     }
 }

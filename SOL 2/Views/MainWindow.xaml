@@ -92,6 +92,7 @@
             </StackPanel>
         </GroupBox>
         <!-- Ausrechnen Button -->
-        <Button Content="Ausrechnen" Background="Green" Foreground="White" FontSize="25" Margin="10" Grid.Row="2" Height="50" FontWeight="Bold" />
+        <Button Content="Ausrechnen" Background="Green" Foreground="White" FontSize="25" Margin="10" Grid.Row="2" Height="50" FontWeight="Bold" 
+                Command="{Binding CalculateCommand}" IsEnabled="{Binding CanCalculate}"/>
     </Grid>
 </Window>
