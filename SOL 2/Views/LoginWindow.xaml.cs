@@ -1,4 +1,5 @@
 ﻿using SOL_2.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -8,6 +9,7 @@ namespace SOL_2.Views
     {
         public LoginWindow()
         {
+            InitializeComponent(); // Fügen Sie diese Zeile hinzu
             var viewModel = new LoginViewModel();
             viewModel.CloseAction = new Action(this.Close);
             DataContext = viewModel;

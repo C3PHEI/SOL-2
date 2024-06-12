@@ -72,7 +72,11 @@ namespace SOL_2_API.Controllers
                 return Unauthorized(new { message = "Ungültiger Benutzername oder Passwort." });
             }
 
-            return Ok(new { message = "Login erfolgreich!" });
+            return Ok(new
+            {
+                message = "Login erfolgreich!",
+                userId = existingUser.Id.ToString() // Add the UserID to the response
+            });
         }
     }
 }

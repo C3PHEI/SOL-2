@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using SOL_2.Views;
 
 namespace SOL_2.ViewModels
 {
@@ -15,6 +16,10 @@ namespace SOL_2.ViewModels
         private string _price;
         private string _accountInfo;
         private string _message;
+        private readonly string _userId;
+
+        // Machen Sie _userId zu einer öffentlichen Eigenschaft
+        public string UserId { get; set; }
 
         private Dictionary<string, int> _bills = new Dictionary<string, int>
         {
@@ -95,6 +100,7 @@ namespace SOL_2.ViewModels
         public ICommand ValidateCommand { get; }
         public ICommand ResetCommand { get; }
         public ICommand CalculateCommand { get; }
+        public ICommand OpenRemainingMoneyWindowCommand { get; }
 
         public MainViewModel()
         {
@@ -103,6 +109,7 @@ namespace SOL_2.ViewModels
             ValidateCommand = new RelayCommand(Validate);
             ResetCommand = new RelayCommand(Reset);
             CalculateCommand = new RelayCommand(Calculate, param => CanCalculate);
+            OpenRemainingMoneyWindowCommand = new RelayCommand(OpenRemainingMoneyWindow);
         }
 
         public void SetAccountInfo(string accountInfo)
@@ -239,6 +246,12 @@ namespace SOL_2.ViewModels
                 moneyBackWindow.DataContext = this; // Setze das DataContext des MoneyBack-Fensters
                 moneyBackWindow.Show();
             }
+        }
+
+        private void OpenRemainingMoneyWindow(object parameter)
+        {
+            var remainingMoneyWindow = new RemainingMoneyWindow(ApplicationState.UserId);
+            remainingMoneyWindow.Show();
         }
 
         private void CalculateChange()

@@ -7,6 +7,9 @@ using MongoDB.Driver;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using SOL_2_API.Dtos;
 
 namespace SOL_2_API.Controllers
 {
@@ -36,32 +39,26 @@ namespace SOL_2_API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{userId:length(24)}")]
-        //[Authorize(Roles = "admin")]
-        public async Task<IActionResult> GetCashRegisterByUserId(string userId)
+        [HttpGet("byuserid/{userId}")]
+        public async Task<IActionResult> GetCashRegistersByUserId(string userId)
         {
             if (!ObjectId.TryParse(userId, out var objectId))
             {
-                return BadRequest(new { message = "Ungültiges UserID-Format." });
+                return BadRequest("Invalid UserId format.");
             }
 
             var filter = Builders<CashRegister>.Filter.Eq(cr => cr.UserId, objectId);
-            var cashRegister = await _dbService.CashRegisters.Find(filter)
-                .Project(c => new
-                {
-                    Id = c.Id.ToString(),
-                    UserId = c.UserId.ToString(),
-                    Bills = c.Bills,
-                    Coins = c.Coins
-                })
-                .FirstOrDefaultAsync();
+            var cashRegisters = await _dbService.CashRegisters.Find(filter).ToListAsync();
 
-            if (cashRegister == null)
+            var cashRegisterDtos = cashRegisters.Select(cr => new CashRegisterDto
             {
-                return NotFound();
-            }
+                Id = cr.Id.ToString(),
+                UserId = cr.UserId.ToString(),
+                Bills = cr.Bills,
+                Coins = cr.Coins
+            }).ToList();
 
-            return Ok(cashRegister);
+            return Ok(cashRegisterDtos);
         }
 
         [HttpPut("{userId:length(24)}")]

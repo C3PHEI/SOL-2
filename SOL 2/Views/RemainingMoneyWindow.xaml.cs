@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SOL_2.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace SOL_2
+namespace SOL_2.Views
 {
-    /// <summary>
-    /// Interaktionslogik für RemainingMoneyWindow.xaml
-    /// </summary>
     public partial class RemainingMoneyWindow : Window
     {
-        public RemainingMoneyWindow()
+        public RemainingMoneyWindow(string userId)
         {
             InitializeComponent();
+            var viewModel = new RemainingMoneyViewModel(userId);
+            DataContext = viewModel;
+            viewModel.LoadRemainingMoneyCommand.Execute(null);
         }
     }
 }

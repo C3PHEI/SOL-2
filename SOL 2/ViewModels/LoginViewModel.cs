@@ -1,11 +1,10 @@
-﻿using SOL_2.Models;
-using SOL_2.Services;
-using SOL_2.Views;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SOL_2.Services;
+using SOL_2.Models;
 
 namespace SOL_2.ViewModels
 {
@@ -15,9 +14,6 @@ namespace SOL_2.ViewModels
         private string _username;
         private string _password;
         private string _message;
-
-        // Neue Property für das Schließen des Fensters
-        public Action CloseAction { get; set; }
 
         public string Username
         {
@@ -49,6 +45,8 @@ namespace SOL_2.ViewModels
             }
         }
 
+        public Action CloseAction { get; set; }
+
         public ICommand LoginCommand { get; }
 
         public LoginViewModel()
@@ -59,31 +57,25 @@ namespace SOL_2.ViewModels
 
         private async Task LoginAsync()
         {
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
-            {
-                Message = "Geben Sie etwas ein!";
-                return;
-            }
-
             var user = new User { Username = Username, Password = Password };
-            var response = await _apiService.LoginAsync(user);
+            var tokenResponse = await _apiService.LoginAsync(user);
 
-            if (response != null && response.Message == "Login erfolgreich!")
+            if (tokenResponse != null)
             {
-                Message = response.Message;
-                var mainWindow = new MainWindow();
-                var mainViewModel = (MainViewModel)mainWindow.DataContext;
-                mainViewModel.SetAccountInfo(Username);
+                Message = "Login erfolgreich!";
+                ApplicationState.UserId = tokenResponse.UserId; // Store the UserId
+                var mainWindow = new Views.MainWindow();
                 mainWindow.Show();
-                CloseAction?.Invoke();
+                CloseAction?.Invoke(); // Close the LoginWindow
             }
             else
             {
-                Message = response?.Message ?? "Login fehlgeschlagen.";
+                Message = "Login fehlgeschlagen.";
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

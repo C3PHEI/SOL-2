@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SOL_2.Models
 {
-    public class TokenResponse
+    public class CashRegisterItem
     {
-        public string Message { get; set; }
-        public string UserId { get; set; }
+        public string Denomination { get; set; }
+        public int Quantity { get; set; }
     }
 }
+
