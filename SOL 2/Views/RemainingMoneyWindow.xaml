@@ -56,19 +56,19 @@
                 <TextBlock Text="200 CHF" TextAlignment="Center" Grid.Row="1" Grid.Column="12" Background="LightGray" FontWeight="DemiBold"/>
 
                 <!-- Values Row -->
-                <TextBlock Text="{Binding Bills[0].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="0" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Bills[1].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="1" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Bills[2].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="2" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Bills[3].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="3" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Bills[4].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="4" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Coins[7].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="0" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Coins[6].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="1" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Coins[5].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="2" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Coins[4].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="3" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Coins[3].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="4" Background="LightBlue" FontWeight="DemiBold"/>
                 <TextBlock Text="{Binding Coins[0].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="5" Background="LightBlue" FontWeight="DemiBold"/>
                 <TextBlock Text="{Binding Coins[1].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="6" Background="LightBlue" FontWeight="DemiBold"/>
                 <TextBlock Text="{Binding Coins[2].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="7" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Coins[3].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="8" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Coins[4].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="9" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Coins[5].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="10" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Coins[6].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="11" Background="LightBlue" FontWeight="DemiBold"/>
-                <TextBlock Text="{Binding Coins[7].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="12" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Bills[0].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="8" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Bills[1].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="9" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Bills[2].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="10" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Bills[3].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="11" Background="LightBlue" FontWeight="DemiBold"/>
+                <TextBlock Text="{Binding Bills[4].Quantity}" TextAlignment="Center" Padding="0,10,0,0" Grid.Row="2" Grid.Column="12" Background="LightBlue" FontWeight="DemiBold"/>
 
                 <!-- "Anzahl" Row -->
                 <TextBlock Text="Anzahl" FontWeight="Bold" Background="LightBlue" TextAlignment="Center" Grid.Row="3" Grid.ColumnSpan="13"/>
